@@ -4,7 +4,4 @@
 #include "GameFramework/Controller.h"
 
 
-ATank * ABattleTankGMD::GetConrolledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
+
