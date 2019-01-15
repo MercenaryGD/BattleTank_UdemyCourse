@@ -22,3 +22,30 @@ ATank * ATankPlayerController_WORK::GetConrolledTank() const
 	return Cast<ATank>(GetPawn());
 }
 
+void ATankPlayerController_WORK::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimTowardsCrosshair();
+
+}
+void ATankPlayerController_WORK::AimTowardsCrosshair()
+{
+	if (!GetConrolledTank()) { return; }
+	FVector HitLocation;
+	if(GetSightRayHitLocation(HitLocation))
+	{
+		
+		
+		UE_LOG (LogTemp,Warning,TEXT("HitLocation : %s"),*HitLocation.ToString())
+	
+	
+	}
+}
+bool ATankPlayerController_WORK::GetSightRayHitLocation(FVector& HitOutLocation) const {
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLocation = FVector2D(ViewportSizeX*CrossHairXLocation, ViewportSizeY *CrossHairYLocation);
+	UE_LOG(LogTemp,Warning,TEXT("Screen Location : %s"),*ScreenLocation.ToString())
+	return true;
+}
+
