@@ -17,7 +17,15 @@ void ATankAIController::BeginPlay()
 	}
 }
 
-ATank * ATankAIController::GetConrolledTank() const
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank()) {
+		GetConrolledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
+
+ATank* ATankAIController::GetConrolledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }

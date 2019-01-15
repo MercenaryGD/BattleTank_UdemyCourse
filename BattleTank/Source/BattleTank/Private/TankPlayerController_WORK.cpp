@@ -1,6 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController_WORK.h"
+#include "WorldCollision.h"
+#include "Vector.h"
+
+
 
 void ATankPlayerController_WORK::BeginPlay()
 {
@@ -34,18 +38,41 @@ void ATankPlayerController_WORK::AimTowardsCrosshair()
 	FVector HitLocation;
 	if(GetSightRayHitLocation(HitLocation))
 	{
-		
-		
-		UE_LOG (LogTemp,Warning,TEXT("HitLocation : %s"),*HitLocation.ToString())
-	
-	
+		GetConrolledTank()->AimAt(HitLocation);
 	}
 }
 bool ATankPlayerController_WORK::GetSightRayHitLocation(FVector& HitOutLocation) const {
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX*CrossHairXLocation, ViewportSizeY *CrossHairYLocation);
-	UE_LOG(LogTemp,Warning,TEXT("Screen Location : %s"),*ScreenLocation.ToString())
-	return true;
-}
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("Screen Location : %s"), *ScreenLocation.ToString()))
+		GetLookVectorHitLocation(LookDirection, HitOutLocation);
 
+	}
+		return true;
+}
+bool ATankPlayerController_WORK::GetLookVectorHitLocation(FVector& LookDirection, FVector& HitLocation)const 
+{
+	FHitResult HITRESULT;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + LookDirection * LineTraceRange;
+	if (GetWorld()->LineTraceSingleByChannel(HITRESULT,
+		StartLocation,
+		EndLocation,
+		ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation=HITRESULT.Location;
+			return true;
+	}
+	return false;
+}
+bool ATankPlayerController_WORK::GetLookDirection(FVector2D& ScreenLocation,FVector& LookDirection) const
+{
+
+	FVector CameraWorldLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
+	
+}
