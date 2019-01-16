@@ -3,6 +3,7 @@
 #include "TankPlayerController_WORK.h"
 #include "WorldCollision.h"
 #include "Vector.h"
+#include "Tank.h"
 
 
 
@@ -48,7 +49,7 @@ bool ATankPlayerController_WORK::GetSightRayHitLocation(FVector& HitOutLocation)
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Screen Location : %s"), *ScreenLocation.ToString()))
+		//UE_LOG(LogTemp, Warning, TEXT("Screen Location : %s"), *ScreenLocation.ToString())
 		GetLookVectorHitLocation(LookDirection, HitOutLocation);
 
 	}

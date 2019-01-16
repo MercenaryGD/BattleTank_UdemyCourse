@@ -22,6 +22,7 @@ void ATankAIController::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	if (GetPlayerTank()) {
 		GetConrolledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		
 	}
 }
 
