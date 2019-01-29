@@ -33,14 +33,19 @@ protected:
 private:
 	// Sets default values for this pawn's properties
 	ATank();
+
+	
+	double LastFireTime = 0;
 	UTankBarrel* Barrel = nullptr;
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		TSubclassOf<AProjectile> ProjectileBlueprint;
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTimeInSeconds = 3;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float LaunchSpeed = 5000; // TODO find sensible default
 };
