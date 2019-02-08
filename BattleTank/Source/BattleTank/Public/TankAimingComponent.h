@@ -29,8 +29,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialise(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
-
-
+	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
@@ -40,11 +40,11 @@ public:
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 private:
-	UTankBarrel* Barrel = nullptr;
+	
 
 	void MoveBarrelTowrads(FVector AimDirection);
 
-	UTankTurret* Turret = nullptr;
+
 
 	void MoveTurret(FVector AimDirection);
 protected:

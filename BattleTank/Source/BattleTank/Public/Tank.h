@@ -36,10 +36,9 @@ private:
 	// Sets default values for this pawn's properties
 	ATank();
 
+	UTankBarrel* Barrel = nullptr;
 	
 	double LastFireTime = 0;
-	UTankBarrel* Barrel = nullptr;
-	UTankTurret* Turret = nullptr;
 	// Called when the game starts or when spawned
 
 
