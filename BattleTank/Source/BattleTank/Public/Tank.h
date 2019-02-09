@@ -35,7 +35,7 @@ protected:
 private:
 	// Sets default values for this pawn's properties
 	ATank();
-
+	virtual void BeginPlay() override;
 	UTankBarrel* Barrel = nullptr;
 	
 	double LastFireTime = 0;

@@ -28,25 +28,15 @@ public:
 	UTankAimingComponent();
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
-		void Initialise(UTankTurret* TurretToSet, UTankBarrel* BarrelToSet);
-	UTankBarrel* Barrel = nullptr;
-	UTankTurret* Turret = nullptr;
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+		void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 private:
 	
-
-	void MoveBarrelTowrads(FVector AimDirection);
-
-
-
-	void MoveTurret(FVector AimDirection);
+	void MoveBarrelTowards(FVector AimDirection);
+	UTankBarrel* Barrel = nullptr;
+	UTankTurret* Turret = nullptr;
 protected:
 	UPROPERTY(BlueprintReadOnly,Category="State")
 	EFiringState FiringState = EFiringState::Reloading;

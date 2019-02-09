@@ -22,7 +22,10 @@ ATank::ATank()
 }
 
 
-
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+}
 
 // Called when the game starts or when spawned
 
