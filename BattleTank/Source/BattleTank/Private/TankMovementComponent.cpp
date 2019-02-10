@@ -6,7 +6,7 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack* RithtTrackToSet)
 {
-	if (!LeftTrackToSet || !RithtTrackToSet) { return; }
+	if (!ensure(LeftTrackToSet && RithtTrackToSet)) { return; }
 	LeftTrack = LeftTrackToSet;
 	RithtTrack = RithtTrackToSet;
 	UE_LOG(LogTemp,Warning,TEXT("lol kek"))
